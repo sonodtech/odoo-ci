@@ -1,0 +1,11 @@
+github.com:
+  enterprise:
+    orgs:
+      - odoo
+      - sonodtech
+    private: True
+  "*":
+    orgs:
+      - OCA
+      - odoo
+      - sonodtech
