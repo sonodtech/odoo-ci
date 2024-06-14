@@ -23,6 +23,7 @@ RUN set -x \
     python3.10-dev \
     python3.10-venv \
     postgresql-client \
+    libpq-dev \
     # expect provides the unbuffer utility
     tcl \
     expect \
