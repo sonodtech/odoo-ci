@@ -119,6 +119,6 @@ RUN mkdir -p \
   /home/gitlab-runner/.ssh \
   && chmod 700 /home/gitlab-runner/.ssh
 
-COPY git-autoshare.yml /home/gitlab-runner/.config/git-autoshare/repos.yml
+COPY --chown=gitlab-runner --chmod=644 git-autoshare.yml /home/gitlab-runner/.config/git-autoshare/repos.yml
 
 COPY --chown=gitlab-runner --chmod=644 ssh_config /home/gitlab-runner/.ssh/config
