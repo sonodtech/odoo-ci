@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # some environment variables
 ENV LANG=C.UTF-8 \
@@ -19,11 +19,35 @@ RUN set -x \
     openssh-client \
     rsync \
     make \
+    python3 \
+    python3-dev \
+    python3-venv \
+    python3.8 \
+    python3.8-dev \
+    python3.8-venv \
+    python3.9 \
+    python3.9-dev \
+    python3.9-venv \
     python3.10 \
     python3.10-dev \
     python3.10-venv \
+    python3.11 \
+    python3.11-dev \
+    python3.11-venv \
+    python3.12 \
+    python3.12-dev \
+    python3.12-venv \
+    python3.13 \
+    python3.13-dev \
+    python3.13-venv \
     postgresql-client \
     libpq-dev \
+    libcairo2 \
+    libcairo2-dev \
+    libxml2-dev \
+    libxmlsec1-dev \
+    libxmlsec1-openssl \
+    pkg-config \
     # expect provides the unbuffer utility
     tcl \
     expect \
@@ -39,8 +63,8 @@ RUN set -x \
     # gettext to manipulate .pot, .po files
     gettext \
   # wkhtmltopdf
-  && wget -q -O /tmp/wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb \
-  && echo "ee88d74834bdec650f7432c7d3ef1c981e42ae7a762a75a01f7f5da59abc18d5 /tmp/wkhtmltox.deb" | sha256sum -c - \
+  && wget -q -O /tmp/wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_amd64.deb \
+  && echo "4f723b2691ad8638a9df960e0421d346d7315083e3583a334f33362280ddba15 /tmp/wkhtmltox.deb" | sha256sum -c - \
   && apt-get -y install /tmp/wkhtmltox.deb \
   && rm -f /tmp/wkhtmltox.deb \
   # cleanup
@@ -63,6 +87,9 @@ COPY git-wrapper /usr/local/bin/git
 
 # manifestoo
 RUN pipx install --pip-args="--no-cache-dir" "manifestoo>=0.4.0"
+
+# pip-split-requirements
+RUN pipx install --pip-args="--no-cache-dir" "pip-split-requirements>=0.7"
 
 # create gitlab-runner user, and do the rest of config using that user
 RUN useradd --shell /bin/bash -m gitlab-runner -c ""
